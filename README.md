@@ -8,4 +8,5 @@ class power_ranger{
   ranger_color(string)
   ranger_skill(string)
   ranger_strength(int)
-}```
+}
+```
