@@ -2,4 +2,9 @@ extends layout
 
 block content
   h1= 'Search Result: ' + title
-  
+  - rangers = ['Red','Blaster', 123]
+  div(class="container_fluid")
+    div(class="row")
+      each ranger in rangers
+        div(class="col-sm-2")
+          p #{ranger}
