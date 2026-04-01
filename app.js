@@ -7,6 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var powerRangerRouter = require('./routes/power_ranger');
+var gridRouter = require('./routes/grid');
 
 var app = express();
 
@@ -23,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/power_ranger', powerRangerRouter);
+app.use('/grid', gridRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -38,6 +40,13 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+app.get('/grid', function(req, res) {
+  let query = req.query
+  console.log(`rows ${query.rows}`)
+  console.log(`cols ${query.cols}`)
+  res.render('grid', { title: "Make a Grid", query: query });
 });
 
 module.exports = app;
