@@ -2,17 +2,22 @@ extends layout
 
 block content
   h1= title
-  p My Name is Nikesh Nepali.
-  button(type="button", class="btn btn-secondary" onclick="reduce()") Sample Button
-  div(id="use") take some away
-  script. 
-   current = 11;
-   quantity = 2;
-   function reduce(){
-    current -= quantity;
-    if(current < 0){
-      current = 0;
-    }
-    document.getElementById("use").innerHTML = "Reduced by " + quantity + " to " + current;
-   }
-  a(href="http://localhost:3000/power_ranger") Go to Power Ranger.
+  p #{query.rows} rows and #{query.cols} columns
+  - rows = Number(query.rows)
+  - cols = Number(query.cols)
+  if !(Number.isInteger(rows)) || !(Number.isInteger(cols))
+    p "This is not an Integer"
+  else if( (rows < 2 || rows > 12) || (cols < 2 || cols > 12))
+    p "This is out of range"
+  else
+    table#router
+    - for(let i = 0; i < rows; i++)
+      tr#middle 
+      - for(let j = 0; j < cols; j++)
+        td=isVal(i,j) + " "
+      - 
+      br
+    - 
+    - function isVal(i,j){
+    -  return (i * 2 - j)
+    - }
